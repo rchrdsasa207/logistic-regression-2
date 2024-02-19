@@ -75,7 +75,8 @@ func main() {
 		b -= db * learningRateB
 	}
 	fmt.Println("Weight:", w, "Bias:", b)
-	fmt.Println("Accuracy:", accuracy(xTest, yTest, w, b))
+	score := accuracy(xTest, yTest, w, b)
+	fmt.Println("Accuracy:", score)
 
 	prob := inference(xTest, w, b)
 	for i := range prob {
@@ -94,7 +95,8 @@ func main() {
 	for _, p := range pps {
 		plotters = append(plotters, p)
 	}
-	if err := ebiten.RunGame(&App{img: ebiten.NewImageFromImage(Plot(screenWidth, screenHeight, plotters...))}); err != nil {
+	legend := fmt.Sprintf("Accuracy: %.2f", score)
+	if err := ebiten.RunGame(&App{img: ebiten.NewImageFromImage(Plot(screenWidth, screenHeight, legend, plotters...))}); err != nil {
 		log.Fatal(err)
 	}
 }
