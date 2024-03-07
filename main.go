@@ -19,12 +19,12 @@ type InputReader interface {
 }
 
 const (
-	inputFileName = "data/circle.csv"
+	inputFileName = "data/arcs.csv"
 
-	epochs        = 500000
+	epochs        = 1000000
 	learningRateW = 1e-10
 	learningRateB = 1e-1
-	power         = 3
+	power         = 20
 )
 
 var (
@@ -84,7 +84,7 @@ func main() {
 		}
 		squaredGradB += db * db
 		b -= (learningRate / math.Sqrt(squaredGradB+epsilon)) * db
-		if i%1000 == 0 {
+		if i%10000 == 0 {
 			fmt.Println(dw, db)
 		}
 		// for i := range w {
